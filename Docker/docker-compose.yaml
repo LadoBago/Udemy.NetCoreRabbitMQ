@@ -1,0 +1,25 @@
+version: "3.9"
+services: 
+  rabbitmq:
+    build: ./rabbitmq/
+    ports: 
+      - "15672:15672"
+      - "5672:5672"
+    container_name: rabbitmq-mb
+  banking-db:
+    image: postgres
+    ports: 
+      - "5432:5432"
+    container_name: banking-db-postgres
+    environment:
+      - POSTGRES_PASSWORD=Qwer1234
+    volumes:
+      - type: bind
+        source: ./Data/pgdata
+        target: /var/lib/postgresql/data
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8080
+
+
